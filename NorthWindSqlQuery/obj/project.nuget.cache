@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "v4A0i4IB3B043js/QfvBQV5q5zuOAGmhgHcGREabG8odudNAbqSu8PAQiQ2SnazQX8vQsQ70mWdOAyb85Xaykg==",
+  "dgSpecHash": "s2zLUfLcQ6RpVwsOv6Lhabj+Hlpus5anOOriT/jPoWo6aAvSiw//nLW8Sj/QJA+jNEVj3he4Na+N6foEpFYZlQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Gamze Nur Demir\\source\\repos\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
+  "projectFilePath": "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

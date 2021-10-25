@@ -268,15 +268,16 @@ namespace NorthWindSqlQuery
             //from all orders shipped later than the required date.
             Console.WriteLine("Query12\n");
             
-            var result = _db.Orders.Select(x => new
-            {
-                EmployeeId = x.EmployeeId,
-                OrderId = x.OrderId,
-                CustomerId = x.CustomerId,
-                RequiredDate = x.RequiredDate,
-                ShippedDate = x.ShippedDate
-            }
-            ).Where(x => x.ShippedDate > x.RequiredDate).ToList();
+            var result = _db.Orders.Where(x => x.ShippedDate > x.RequiredDate)
+                .Select(x => new
+                {
+                    EmployeeId = x.EmployeeId,
+                    OrderId = x.OrderId,
+                    CustomerId = x.CustomerId,
+                    RequiredDate = x.RequiredDate,
+                    ShippedDate = x.ShippedDate
+                }
+             ).ToList();
 
             foreach (var item in result)
             {

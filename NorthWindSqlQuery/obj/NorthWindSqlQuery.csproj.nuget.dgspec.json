@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Gamze Nur Demir\\source\\repos\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj": {}
+    "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Gamze Nur Demir\\source\\repos\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj": {
+    "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Gamze Nur Demir\\source\\repos\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
+        "projectUniqueName": "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
         "projectName": "NorthWindSqlQuery",
-        "projectPath": "C:\\Users\\Gamze Nur Demir\\source\\repos\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
+        "projectPath": "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
         "packagesPath": "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Gamze Nur Demir\\source\\repos\\NorthWindSqlQuery\\NorthWindSqlQuery\\obj\\",
+        "outputPath": "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gamze Nur Demir\\AppData\\Roaming\\NuGet\\NuGet.Config",
