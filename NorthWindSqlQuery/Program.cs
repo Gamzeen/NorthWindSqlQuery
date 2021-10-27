@@ -1,4 +1,5 @@
-﻿using NorthWindSqlQuery.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthWindSqlQuery.Entities;
 using System;
 using System.Linq;
 
@@ -34,8 +35,53 @@ namespace NorthWindSqlQuery
 
             //Query11();
 
-            Query12();
+            //Query12();
 
+            //Query13();
+
+            //Query14();
+
+            //Query15();
+
+            //Query16();
+
+            //Query17();
+
+            //Query18();
+
+            //Query19();
+
+            //Query20();
+
+            //Query21();
+
+            //Query22();
+
+            //Query23();
+
+            //Query24();
+
+            //Query25();
+
+            //Query26();
+
+            //Query27();
+
+            //Query28();
+
+            //Query29();
+
+            //Query30();
+
+            //Query31();
+
+            //Query32();
+
+            //Query33();
+
+            //Query34();
+
+            Query35();
             Console.Read();
         }
 
@@ -267,7 +313,7 @@ namespace NorthWindSqlQuery
             //12.Create a report that shows the EmployeeID, OrderID, CustomerID, RequiredDate, ShippedDate 
             //from all orders shipped later than the required date.
             Console.WriteLine("Query12\n");
-            
+
             var result = _db.Orders.Where(x => x.ShippedDate > x.RequiredDate)
                 .Select(x => new
                 {
@@ -285,28 +331,496 @@ namespace NorthWindSqlQuery
             }
 
         }
+
+        public static void QueryHard()
+        {
+            // For each order, calculate a subtotal for each Order (identified by OrderID).
+            // This is a simple query using GROUP BY to aggregate data for each order.
+        }
+
+        public static void Query13()
+        {
+            //13.Create a report that shows the City, CompanyName, ContactName of customers from cities starting with A or B.
+
+            Console.WriteLine("Query13\n");
+            var result = _db.Customers.Where(x => x.City.StartsWith("A") || x.City.StartsWith("B"))
+                .Select(x => new
+                {
+                    City = x.City,
+                    CompanyName = x.CompanyName,
+                    ContactName = x.ContactName,
+                }
+                ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query14()
+        {
+            Console.WriteLine("Query14" +
+                "\n");
+            //14.Create a report showing all the even numbers of OrderID from the orders table.
+            var result = _db.Orders.Where(x => x.OrderId % 2 == 0).Select(x => x.OrderId).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query15()
+        {
+            Console.WriteLine("Query15\n");
+            //15.Create a report that shows all the orders where the freight cost more than $500.
+            var result = _db.Orders.Where(x => x.Freight > 500).Select(x => x.OrderId).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine($"Order ID: {item.ToString()}");
+            }
+        }
+
+        public static void Query16()
+        {
+            Console.WriteLine("Query16\n");
+            //16. Create a report that shows the ProductName, UnitsInStock, UnitsOnOrder, ReorderLevel
+            //of all products that are up for reorder.
+
+            var result = _db.Products.Where(x => x.ReorderLevel != 0)
+                .Select(x => new
+                {
+                    ProductName = x.ProductName,
+                    UnitsInStock = x.UnitsInStock,
+                    UnitsOnOrder = x.UnitsOnOrder,
+                    ReorderLevel = x.ReorderLevel
+                }
+            ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query17()
+        {
+            Console.WriteLine("Query17\n");
+            //17.Create a report that shows the CompanyName, ContactName number of all customer that have no fax number.
+            var result = _db.Customers.Where(x => x.Fax == null || x.Fax == "").Select(x => new
+            {
+                CompanyName = x.CompanyName,
+                ContactName = x.ContactName
+            }
+            ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query18()
+        {
+            Console.WriteLine("Query18\n");
+            //18. Create a report that shows the FirstName, LastName of all employees that do not report to anybody.
+            var result = _db.Employees.Where(x => x.ReportsTo == null || x.ReportsTo == 0)
+                .Select(x => new
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName
+                }
+                ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query19()
+        {
+            Console.WriteLine("Query19\n");
+            //19.Create a report showing all the odd numbers of OrderID from the orders table.
+            var result = _db.Orders.Where(x => x.OrderId % 2 != 0)
+                .Select(x => new
+                {
+                    OrderId = x.OrderId,
+                    OrderDate = x.OrderDate,
+                }
+                    ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query20()
+        {
+            Console.WriteLine("Query20\n");
+            //20. Create a report that shows the CompanyName, ContactName, Fax of all customers
+            //that do not have Fax number and sorted by ContactName.
+
+            var result = _db.Customers.Where(x => x.Fax == null).Select(x => new
+            {
+                CompanyName = x.CompanyName,
+                ContactName = x.ContactName,
+                Fax = x.Fax
+            }
+            ).OrderBy(x => x.ContactName).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query21()
+        {
+            //21. Create a report that shows the City, CompanyName, ContactName of customers from cities that has letter L in the name
+            //sorted by ContactName
+            Console.WriteLine("Query21\n");
+            var result = _db.Customers.Where(x => x.City.Contains("L")).OrderBy(x => x.ContactName)
+                .Select(x => new
+                {
+                    City = x.City,
+                    CompanyName = x.CompanyName,
+                    ContactName = x.ContactName
+                }
+                ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Query22()
+        {
+            //22.Create a report that shows the FirstName, LastName, BirthDate of employees born in the 1950s.
+            Console.WriteLine("Query22\n");
+            string dtString1 = "07.05.1950";
+            string dtString2 = "07.05.1960";
+            var result = _db.Employees
+                .Where(x => x.BirthDate.Value.Year >= Convert.ToDateTime(dtString1).Year && x.BirthDate.Value.Year < Convert.ToDateTime(dtString2).Year)
+                .Select(x => new
+                {
+                    FirstName = x.FirstName,
+                    LastName = x.LastName,
+                    BirthDate = x.BirthDate
+                }
+                ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query23()
+        {
+            //23. Create a report that shows the FirstName, LastName, the year of Birthdate as birth year from the employees table.
+            Console.WriteLine("Qery21\n");
+            var result = _db.Employees.Select(x => new
+            {
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                BirthDate = x.BirthDate.Value.Year
+            }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query24()
+        {
+            //24. Create a report showing OrderID, total number of Order ID as NumberofOrders from the orderdetails table grouped by
+            // OrderID and sorted by NumberofOrders in descending order. HINT: you will need to use a Groupby statement.
+            Console.WriteLine("Query24\n");
+
+            var result = _db.OrderDetails.GroupBy(x => x.OrderId)
+                .Select(x => new { orderId = x.Key, NumberofOrders = x.Count() })
+                .OrderByDescending(x => x.orderId)
+                .OrderByDescending(x => x.NumberofOrders).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query25()
+        {
+            //TODO: JOIN
+            //25. Create a report that shows the SupplierID, ProductName, CompanyName from all product Supplied by Exotic Liquids,
+            //Specialty Biscuits, Ltd., Escargots Nouveaux sorted by the supplier ID
+            Console.WriteLine("Query25\n");
+
+            var result = _db.Products.Include("Supplier").Select(x => new
+            {
+                SupplierID = x.SupplierId,
+                ProductName = x.ProductName,
+                CompanyName = x.Supplier.CompanyName
+            }
+            ).Where(x => x.CompanyName.Contains("Exotic Liquids") || x.CompanyName.Contains("Specialty Biscuits") || x.CompanyName.Contains(" Ltd.") || x.CompanyName.Contains("Escargots Nouveaux"))
+            .OrderBy(x => x.SupplierID).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+
+        public static void Query26()
+        {
+            //26.Create a report that shows the ShipPostalCode, OrderID, OrderDate, RequiredDate, ShippedDate, ShipAddress of all orders
+            //with ShipPostalCode beginning with "98124".
+
+            Console.WriteLine("Query26\n");
+            var result = _db.Orders.Where(x => x.ShipPostalCode.StartsWith("98124")).Select(x => new
+            {
+                ShipPostalCode = x.ShipPostalCode,
+                OrderID = x.OrderId,
+                OrderDate = x.OrderDate,
+                RequiredDate = x.RequiredDate,
+                ShippedDate = x.ShippedDate,
+                ShipAddress = x.ShipAddress
+            }
+            ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query27()
+        {
+            //27. Create a report that shows the ContactName, ContactTitle, CompanyName of customers that
+            //the has no "Sales" in their ContactTitle.
+            Console.WriteLine("Query27\n");
+            var result = _db.Customers.Where(x => x.ContactTitle.Contains("Sales")).Select(x => new
+            {
+                ContactName = x.ContactName,
+                ContactTitle = x.ContactTitle,
+                CompanyName = x.CompanyName
+            }
+            ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Query28()
+        {
+            Console.WriteLine("Query28\n");
+            //28.Create a report that shows the LastName, FirstName, City of employees in cities other "Seattle";
+            var result = _db.Employees.Where(x => !x.City.Contains("Seattle")).Select(x => new
+            {
+                LastName = x.LastName,
+                FirstName = x.FirstName,
+                City = x.City
+            }
+            ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+
+        public static void Query29()
+        {
+            Console.WriteLine("Query29"); //x.Country == "Mexico" || 
+            //29. Create a report that shows the CompanyName, ContactTitle, City, Country of all customers
+            //in any city in Mexico or other cities in Spain other than Madrid.
+
+            var result = _db.Customers.Where(x => x.Country == "Spain" && x.City != "Madrid" || x.Country == "Mexico").Select(x => new
+            {
+                CompanyName = x.CompanyName,
+                ContactTitle = x.ContactTitle,
+                City = x.City,
+                Country = x.Country,
+            }
+            ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query30()
+        {   //30. Create a select statement that outputs the following:
+            Console.WriteLine("Query30\n");
+            var result = _db.Employees.Select(x => new
+            {
+                FirstName = x.FirstName,
+                LastName = x.LastName,
+                Extension = x.Extension
+            }
+            ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.FirstName + " " + item.LastName + " " + "can be reached at x" + item.Extension);
+            }
+        }
+
+        public static void Query31()
+        {
+            //TODO: Linq Like kullanımda karşılaştığımız problem ilgili cümlenin sondan ikinci
+            //karakterine göre like işlemini yapamıyoruz, daha sonra bakılacak.
+
+
+            //31. Create a report that shows the ContactName of all customers that do not have letter A
+            //as the second alphabet in their Contactname.
+            Console.WriteLine("Query31\n");
+            var result = _db.Customers.Where(x => !x.ContactName.Contains("%rs")).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query32()
+        {
+            //32. Create a report that shows the average UnitPrice rounded to the next whole number,   .Average(x => x.UnitPrice);
+            //total price of UnitsInStock and x => x.UnitsInStock * y=> y.UnitPrice  .Aggregate((UnitsInStock, UnitPrice) => UnitsInStock * UnitPrice)
+            //maximum number of orders from the products table.  Max(x=>x.unitororder)
+            //All saved as AveragePrice, TotalStock and MaxOrder respectively. 
+            Console.WriteLine("Query32\n");
+            var result = _db.Products.GroupBy(i => 1).Select(x => new
+            {
+                AveragePrice = Math.Round(Convert.ToDecimal((x.Average(i => i.UnitPrice)))),
+                TotalStock = x.Sum(i => i.UnitsInStock),
+                MaxOrder = x.Max(i => i.UnitsOnOrder)
+            }
+            ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+
+        public static void Query33()
+        {
+            //33. Create a report that shows the SupplierID, CompanyName, CategoryName, ProductName and UnitPrice from the products,
+            //suppliers and categories table.
+            Console.WriteLine("Query33\n");
+            var result = _db.Products.Include("Category").Include("Supplier").Select(x => new
+            {
+                SupplierID = x.SupplierId,
+                CompanyName = x.Supplier.CompanyName,
+                CategoryName = x.Category.CategoryName,
+                ProductName = x.ProductName,
+                UnitPrice = x.UnitPrice
+            }
+            ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Query34()
+        {
+            //34. Create a report that shows the CustomerID, sum of Freight, from the orders table with sum of freight
+            //greater $200, grouped by CustomerID. HINT: you will need to use a Groupby and a Having statement
+
+            Console.WriteLine("Query34\n");
+
+            var result = _db.Orders.Include("Customer").GroupBy(x => x.CustomerId).Select(x => new
+            {
+                Freight = x.Sum(i => i.Freight),
+                CustomerID = x.Key
+            }
+            ).Where(x => x.Freight > 200).OrderBy(x => x.Freight).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query35()
+        {
+            //35. Create a report that shows the OrderID ContactName, UnitPrice, Quantity, Discount from the order details, orders and
+            //customers table with discount given on every purchase.
+            Console.WriteLine("Query35\n");
+
+            var result = _db.OrderDetails
+                .Include(o => o.Order)
+                .Include(c => c.Order.Customer)
+                .Where(x => x.Discount != 0)
+                   .Select(x => new
+                   {
+                       OrderID = x.OrderId,
+                       ContactName = x.Order.Customer.ContactName,
+                       UnitPrice = x.UnitPrice,
+                       Quantity = x.Quantity,
+                       Discount = x.Discount
+                   })
+                 .OrderBy(x => x.OrderID).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+
+
+        }
+
+
+        public static void Query36()
+        {
+            //36.Create a report that shows the EmployeeID, the LastName and FirstName as employee, and the LastName and FirstName of
+            //who they report to as manager from the employees table sorted by Employee ID. HINT: This is a SelfJoin.
+            Console.WriteLine("Query36\n");
+            //var result = _db.Employees.Join(e => e.EmployeeId, m => m.ReportsTo, (e, m) => new
+            //{
+            //    employeeID=e,
+            //    managerID=m
+            //}
+            //);
+
+
+            var result = _db.Employees.Select(x => new
+            {
+                EmployeeId = x.EmployeeId,
+                EmployeeFN = x.FirstName,
+                EmployeeLN = x.LastName,
+                Reporter = x.ReportsTo
+            }
+            ).ToList();
+
+        }
+        //
+        //TODO: Extensions 
+        //public static class StringExtensions
+        //{
+        //    public static bool ContainsAny(this string str, params string[] values)
+        //    {
+        //        if (!string.IsNullOrEmpty(str) || values.Length > 0)
+        //        {
+        //            foreach (string value in values)
+        //            {
+        //                if (str.Contains(value))
+        //                    return true;
+        //            }
+        //        }
+
+        //        return false;
+        //    }
+        //}
+
     }
-
-
-
-
-    //
-    //TODO: buna konuyu daha sonra işleyeceğiz.
-    //public static class StringExtensions
-    //{
-    //    public static bool ContainsAny(this string str, params string[] values)
-    //    {
-    //        if (!string.IsNullOrEmpty(str) || values.Length > 0)
-    //        {
-    //            foreach (string value in values)
-    //            {
-    //                if (str.Contains(value))
-    //                    return true;
-    //            }
-    //        }
-
-    //        return false;
-    //    }
-    //}
-
 }
