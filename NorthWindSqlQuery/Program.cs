@@ -81,7 +81,13 @@ namespace NorthWindSqlQuery
 
             //Query34();
 
-            Query35();
+            //Query35();
+
+            //Query36();
+
+            //Query37();
+
+            Query38();
             Console.Read();
         }
 
@@ -785,24 +791,65 @@ namespace NorthWindSqlQuery
             //36.Create a report that shows the EmployeeID, the LastName and FirstName as employee, and the LastName and FirstName of
             //who they report to as manager from the employees table sorted by Employee ID. HINT: This is a SelfJoin.
             Console.WriteLine("Query36\n");
-            //var result = _db.Employees.Join(e => e.EmployeeId, m => m.ReportsTo, (e, m) => new
-            //{
-            //    employeeID=e,
-            //    managerID=m
-            //}
-            //);
 
 
-            var result = _db.Employees.Select(x => new
+            var result = (from m in _db.Employees
+                          join e in _db.Employees on m.ReportsTo equals e.EmployeeId
+                          select new
+                          {
+                              Employee = (m.FirstName + " " + m.LastName),
+                              Manager = (e.FirstName + " " + e.LastName)
+                          }
+                          ).ToList();
+
+            foreach (var item in result)
             {
-                EmployeeId = x.EmployeeId,
-                EmployeeFN = x.FirstName,
-                EmployeeLN = x.LastName,
-                Reporter = x.ReportsTo
+                Console.WriteLine(item.ToString());
             }
-            ).ToList();
 
         }
+
+        public static void Query37()
+        {
+            //37.Create a report that shows the average, minimum and maximum UnitPrice of all products as AveragePrice, MinimumPrice
+            //and MaximumPrice respectively.
+            Console.WriteLine("Query37\n");
+            var result = (from p in _db.Products
+                          group p by 1 into g
+                          select new
+                          {
+                              Key = g.Key,
+                              TotalUnitPrice = g.Sum(x => x.UnitPrice),
+                              Average = g.Average(x => x.UnitPrice),
+                              MinUnitPrice = g.Min(x => x.UnitPrice),
+                              MaxUnitPrice = g.Max(x => x.UnitPrice)
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query38()
+        {
+            //38.Create a view named CustomerInfo that shows the CustomerID, CompanyName, ContactName, ContactTitle, Address, City,
+            //Country, Phone, OrderDate, RequiredDate, ShippedDate from the customers and orders table. HINT: Create a View.
+            var result = (from c in _db.Customers
+                          join o in _db.Orders on c.CustomerId equals o.CustomerId
+                          select new
+                          {
+                              customer=c,
+                              order=o,
+                          }
+                          ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.order.Customer.ToString());
+            }
+        }
+
+
         //
         //TODO: Extensions 
         //public static class StringExtensions
