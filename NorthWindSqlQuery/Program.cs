@@ -1057,6 +1057,7 @@ namespace NorthWindSqlQuery
             Console.WriteLine("Query24\n");
             //TODO: count'u  let yöntemi ile denemen gerekli, bu yöntem de çaalışıyor.
 
+
             var result = (from p in _db.OrderDetails
                           group p by p.OrderId into pgroup
                           orderby pgroup.Count() descending 
