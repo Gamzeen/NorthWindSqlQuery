@@ -14,52 +14,76 @@ namespace NorthWindSqlQuery
             _db = new NortWindContext();
 
             //Query1();
+            //Method1();
 
             //Query2();
+            //Method2();
 
             //Query3();
+            //Method3();
 
             //Query4();
+            //Method4();
 
             //Query5();
+            //Method5();
 
             //Query6();
+            //Method6();
 
             //Query7();
+            //Method7();
 
             //Query8();
+            //Method8();
 
             //Query9();
+            //Method9();
 
             //Query10();
+            //Method10();
 
             //Query11();
+            //Method11();
 
             //Query12();
+            //Method12();
 
             //Query13();
+            //Method13();
 
             //Query14();
+            //Method14();
 
             //Query15();
+            //Method15();
 
             //Query16();
+            //Method16();
 
             //Query17();
+            //Method17();
 
             //Query18();
+            //Method18();
 
             //Query19();
+            //Method19();
 
             //Query20();
+            //Method20();
 
             //Query21();
+            //Method21();
 
             //Query22();
+            //Method22();
 
             //Query23();
+            //Method23();
 
-            //Query24();
+            Query24();
+            Method24();
 
             //Query25();
 
@@ -87,15 +111,15 @@ namespace NorthWindSqlQuery
 
             //Query37();
 
-            Query38();
+            //Query38();
             Console.Read();
         }
 
-        public static void Query1()
+        public static void Method1()
         {
             //1.Create a report that shows the CategoryName and Description from the categories table sorted by CategoryName.
 
-            Console.WriteLine("Query1\n");
+            Console.WriteLine("Method1\n");
 
             var result = _db.Categories.Select(x => new
             {
@@ -110,12 +134,29 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query2()
+        public static void Query1()
+        {
+            //1.Create a report that shows the CategoryName and Description from the categories table sorted by CategoryName.
+            Console.WriteLine("Query1\n");
+            var result = (from c in _db.Categories
+                          select new
+                          {
+                              CategoryName = c.CategoryName,
+                              Description = c.Description
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method2()
         {
             //2. Create a report that shows the ContactName, CompanyName, ContactTitle and Phone number from the customers table
             //sorted by Phone.
 
-            Console.WriteLine("Query2\n");
+            Console.WriteLine("Method2\n");
 
             var result = _db.Customers.Select(x => new
             {
@@ -130,12 +171,35 @@ namespace NorthWindSqlQuery
                 Console.WriteLine(item.ToString());
             }
         }
-        public static void Query3()
+
+        public static void Query2()
+        {
+            //2. Create a report that shows the ContactName, CompanyName, ContactTitle and Phone number from the customers table
+            //sorted by Phone.
+
+            Console.WriteLine("Query2\n");
+
+            var result = (from c in _db.Customers
+                          orderby c.Phone
+                          select new
+                          {
+                              ContactName = c.ContactName,
+                              CompanyName = c.CompanyName,
+                              ContactTitle = c.ContactTitle,
+                              Phone = c.Phone
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method3()
         {
             //3.Create a report that shows the capitalized FirstName and capitalized LastName renamed as FirstName and Lastname
             //respectively and HireDate from the employees table sorted from the newest to the oldest employee.
 
-            Console.WriteLine("Query3\n");
+            Console.WriteLine("Method3\n");
 
             var result = _db.Employees.Select(x => new
             {
@@ -151,12 +215,36 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query4()
+        public static void Query3()
+        {
+            //3.Create a report that shows the capitalized FirstName and capitalized LastName renamed as FirstName and Lastname
+            //respectively and HireDate from the employees table sorted from the newest to the oldest employee.
+
+            Console.WriteLine("Query3\n");
+
+            var result = (from e in _db.Employees
+                          orderby e.HireDate descending
+                          select new
+                          {
+                              FirstName = e.FirstName.ToUpper(),
+                              LastName = e.LastName.ToUpper(),
+                              HireDate = e.HireDate
+
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method4()
+
         {
             //4.Create a report that shows the top 10 OrderID, OrderDate, ShippedDate, CustomerID, Freight from the orders table sorted
             //by Freight in descending order
-
-            Console.WriteLine("Query4\n");
+            Console.WriteLine("Method4\n");
+            Console.WriteLine("\n");
 
             var result = _db.Orders.Select(x => new
             {
@@ -173,10 +261,34 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query5()
+        public static void Query4()
+        {
+            //4.Create a report that shows the top 10 OrderID, OrderDate, ShippedDate, CustomerID, Freight from the orders table sorted
+            //by Freight in descending order
+
+            Console.WriteLine("Query4\n");
+
+            var result = (from o in _db.Orders
+                          orderby o.Freight descending
+                          select new
+                          {
+                              OrderID = o.OrderId,
+                              OrderDate = o.OrderDate,
+                              ShippedDate = o.ShippedDate,
+                              CustomerID = o.CustomerId,
+                              Freight = o.Freight
+                          }).ToList().Take(10);
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method5()
         {
             //5.Create a report that shows all the CustomerID in lowercase letter and renamed as ID from the customers table.
-            Console.WriteLine("Query5\n");
+            Console.WriteLine("Method5\n");
             var result = _db.Customers.Select(x => new
             {
                 ID = x.CustomerId.ToLower(),
@@ -185,15 +297,31 @@ namespace NorthWindSqlQuery
 
             foreach (var item in result)
             {
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(item.ToString());
             }
         }
 
-        public static void Query6()
+        public static void Query5()
+        {
+            //5.Create a report that shows all the CustomerID in lowercase letter and renamed as ID from the customers table.
+            Console.WriteLine("Query5\n");
+            var result = (from c in _db.Customers
+                          select new
+                          {
+                              CustomerID = c.CustomerId.ToLower()
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method6()
         {
             // 6.Create a report that shows the CompanyName, Fax, Phone, Country, HomePage from the suppliers table sorted by the
             // Country in descending order then by CompanyName in ascending order.
-            Console.WriteLine("Query6\n");
+            Console.WriteLine("Method6\n");
             var result = _db.Suppliers.Select(x => new
             {
                 CompanyName = x.CompanyName,
@@ -202,17 +330,43 @@ namespace NorthWindSqlQuery
                 HomePage = x.HomePage,
                 Country = x.Country
             }
-            ).OrderByDescending(x => x.Country).OrderBy(x => x.Country);
+            ).OrderByDescending(x => x.Country).OrderBy(x => x.CompanyName);
             foreach (var item in result)
             {
                 Console.WriteLine(item.ToString());
             }
         }
 
-        public static void Query7()
+        public static void Query6()
+        {
+            // 6.Create a report that shows the CompanyName, Fax, Phone, Country, HomePage from the suppliers table sorted by the
+            // Country in descending order then by CompanyName in ascending order.
+            Console.WriteLine("Query6\n");
+
+            var result = (from s in _db.Suppliers
+                          orderby s.Country descending
+                          orderby s.CompanyName
+                          select new
+                          {
+                              CompanyName = s.CompanyName,
+                              Fax = s.Fax,
+                              Phone = s.Phone,
+                              Country = s.Country,
+                              HomePage = s.HomePage,
+
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method7()
         {
             //7.Create a report that shows CompanyName, ContactName of all customers from ‘Buenos Aires' only.
-            Console.WriteLine("Query7\n");
+            Console.WriteLine("Method7\n");
 
             var result = _db.Customers.Where(x => x.City == "Buenos Aires").Select(x => new
             {
@@ -228,10 +382,27 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query8()
+        public static void Query7()
+        {
+            //7.Create a report that shows CompanyName, ContactName of all customers from ‘Buenos Aires' only.
+            Console.WriteLine("Query7\n");
+            var result = (from c in _db.Customers
+                          where c.City == "Buenos Aires"
+                          select new
+                          {
+                              CompanyName = c.CompanyName,
+                              ContactName = c.ContactName
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method8()
         {
             //8. Create a report showing ProductName, UnitPrice, QuantityPerUnit of products that are out of stock
-            Console.WriteLine("Query8\n");
+            Console.WriteLine("Method8\n");
 
             var result = _db.Products.Where(x => x.UnitsInStock == 0).Select(x => new
             {
@@ -248,10 +419,31 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query9()
+        public static void Query8()
+        {
+            //8. Create a report showing ProductName, UnitPrice, QuantityPerUnit of products that are out of stock
+            Console.WriteLine("Query8\n");
+
+            var result = (from p in _db.Products
+                          where p.UnitsInStock == 0
+                          select new
+                          {
+                              ProductName = p.ProductName,
+                              UnitPrice = p.UnitPrice,
+                              QuantityPerUnit = p.QuantityPerUnit
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method9()
         {
             //Create a report showing all the ContactName, Address, City of all customers not from Germany, Mexico, Spain.
-            Console.WriteLine("Query9\n");
+            Console.WriteLine("Method9\n");
 
 
             var result = _db.Customers.Select(x => new
@@ -272,10 +464,32 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query10()
+        public static void Query9()
+        {
+            //Create a report showing all the ContactName, Address, City of all customers not from Germany, Mexico, Spain.
+            Console.WriteLine("Query9\n");
+            var result = (from c in _db.Customers
+                          where !c.Country.Contains("Mexico")
+                          where !c.Country.Contains("Germany")
+                          where !c.Country.Contains("Spain")
+                          select new
+                          {
+                              ContactName = c.ContactName,
+                              Address = c.Address,
+                              City = c.City,
+                              Country = c.Country
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method10()
         {
             //10.Create a report showing OrderDate, ShippedDate, CustomerID, Freight of all orders placed on 21 May 1996.
-            Console.WriteLine("Query10\n");
+            Console.WriteLine("Method10\n");
 
             string dtString = "07.05.1996";
 
@@ -294,10 +508,32 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query11()
+        public static void Query10()
+        {
+            //10.Create a report showing OrderDate, ShippedDate, CustomerID, Freight of all orders placed on 21 May 1996.
+            Console.WriteLine("Query10\n");
+
+            string dtString = "07.05.1996";
+            DateTime dt = Convert.ToDateTime(dtString);
+            var result = (from o in _db.Orders
+                          where o.OrderDate == dt
+                          select new
+                          {
+                              OrderDate = o.OrderDate,
+                              ShippedDate = o.ShippedDate,
+                              CustomerID = o.CustomerId,
+                              Freight = o.Freight
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method11()
         {
             //11. Create a report showing FirstName, LastName, Country from the employees not from United States.
-            Console.WriteLine("Query11\n");
+            Console.WriteLine("Method11\n");
 
             var result = _db.Employees.Where(x => !x.Country.Contains("USA"))
                 .Select(x => new
@@ -314,11 +550,30 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query12()
+        public static void Query11()
+        {
+            //11. Create a report showing FirstName, LastName, Country from the employees not from United States.
+            Console.WriteLine("Query11\n");
+
+            var result = (from e in _db.Employees
+                          where e.Country != "USA"
+                          select new
+                          {
+                              FirstName = e.FirstName,
+                              LastName = e.LastName,
+                              Country = e.Country
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method12()
         {
             //12.Create a report that shows the EmployeeID, OrderID, CustomerID, RequiredDate, ShippedDate 
             //from all orders shipped later than the required date.
-            Console.WriteLine("Query12\n");
+            Console.WriteLine("Method12\n");
 
             var result = _db.Orders.Where(x => x.ShippedDate > x.RequiredDate)
                 .Select(x => new
@@ -338,17 +593,41 @@ namespace NorthWindSqlQuery
 
         }
 
-        public static void QueryHard()
+        public static void Query12()
+        {
+            //12.Create a report that shows the EmployeeID, OrderID, CustomerID, RequiredDate, ShippedDate 
+            //from all orders shipped later than the required date.
+            Console.WriteLine("Query12\n");
+
+            var result = (from o in _db.Orders
+                          where o.RequiredDate < o.ShippedDate
+                          select new
+                          {
+                              EmployeeID = o.EmployeeId,
+                              OrderID = o.OrderId,
+                              CustomerID = o.CustomerId,
+                              RequiredDate = o.RequiredDate,
+                              ShippedDate = o.ShippedDate
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void MethodHard()
         {
             // For each order, calculate a subtotal for each Order (identified by OrderID).
             // This is a simple query using GROUP BY to aggregate data for each order.
         }
 
-        public static void Query13()
+        public static void Method13()
         {
             //13.Create a report that shows the City, CompanyName, ContactName of customers from cities starting with A or B.
 
-            Console.WriteLine("Query13\n");
+            Console.WriteLine("Method13\n");
             var result = _db.Customers.Where(x => x.City.StartsWith("A") || x.City.StartsWith("B"))
                 .Select(x => new
                 {
@@ -364,10 +643,30 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query14()
+        public static void Query13()
         {
-            Console.WriteLine("Query14" +
-                "\n");
+            //13.Create a report that shows the City, CompanyName, ContactName of customers from cities starting with A or B.
+            Console.WriteLine("Query13\n");
+
+            var result = (from c in _db.Customers
+                          where c.City.StartsWith("B") || c.City.StartsWith("A")
+                          select new
+                          {
+                              City = c.City,
+                              CompanyName = c.CompanyName,
+                              ContactName = c.ContactName
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method14()
+        {
+            Console.WriteLine("Method14\n");
             //14.Create a report showing all the even numbers of OrderID from the orders table.
             var result = _db.Orders.Where(x => x.OrderId % 2 == 0).Select(x => x.OrderId).ToList();
             foreach (var item in result)
@@ -376,9 +675,26 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query15()
+        public static void Query14()
         {
-            Console.WriteLine("Query15\n");
+            Console.WriteLine("Query14\n");
+            //14.Create a report showing all the even numbers of OrderID from the orders table.
+
+            var result = (from p in _db.Orders
+                          where p.OrderId % 2 == 0
+                          select new
+                          {
+                              OrderID = p.OrderId
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method15()
+        {
+            Console.WriteLine("Method15\n");
             //15.Create a report that shows all the orders where the freight cost more than $500.
             var result = _db.Orders.Where(x => x.Freight > 500).Select(x => x.OrderId).ToList();
             foreach (var item in result)
@@ -387,9 +703,26 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query16()
+        public static void Query15()
         {
-            Console.WriteLine("Query16\n");
+            Console.WriteLine("Query15\n");
+            //15.Create a report that shows all the orders where the freight cost more than $500.
+            var result = (from p in _db.Orders
+                          where p.Freight > 500
+                          select new
+                          {
+                              OrderId = p.OrderId
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method16()
+        {
+            Console.WriteLine("Method16\n");
             //16. Create a report that shows the ProductName, UnitsInStock, UnitsOnOrder, ReorderLevel
             //of all products that are up for reorder.
 
@@ -408,9 +741,30 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query17()
+        public static void Query16()
         {
-            Console.WriteLine("Query17\n");
+            Console.WriteLine("Query16\n");
+            //16. Create a report that shows the ProductName, UnitsInStock, UnitsOnOrder, ReorderLevel
+            //of all products that are up for reorder.
+            var result = (from p in _db.Products
+                          where p.UnitsInStock != 0
+                          select new
+                          {
+                              ProductName = p.ProductName,
+                              UnitsInStock = p.UnitsInStock,
+                              UnitsOnOrder = p.UnitsOnOrder,
+                              ReorderLevel = p.ReorderLevel
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method17()
+        {
+            Console.WriteLine("Method17\n");
             //17.Create a report that shows the CompanyName, ContactName number of all customer that have no fax number.
             var result = _db.Customers.Where(x => x.Fax == null || x.Fax == "").Select(x => new
             {
@@ -425,9 +779,27 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query18()
+        public static void Query17()
         {
-            Console.WriteLine("Query18\n");
+            Console.WriteLine("Query17\n");
+            //17.Create a report that shows the CompanyName, ContactName number of all customer that have no fax number.
+
+            var result = (from p in _db.Customers
+                          where p.Fax == null
+                          select new
+                          {
+                              CompanyName = p.CompanyName,
+                              ContactName = p.ContactName
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method18()
+        {
+            Console.WriteLine("Method18\n");
             //18. Create a report that shows the FirstName, LastName of all employees that do not report to anybody.
             var result = _db.Employees.Where(x => x.ReportsTo == null || x.ReportsTo == 0)
                 .Select(x => new
@@ -442,9 +814,26 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query19()
+        public static void Query18()
         {
-            Console.WriteLine("Query19\n");
+            Console.WriteLine("Query18\n");
+            //18. Create a report that shows the FirstName, LastName of all employees that do not report to anybody.
+            var result = (from p in _db.Employees
+                          where p.ReportsTo == null
+                          select new
+                          {
+                              FirstName = p.FirstName,
+                              LastName = p.LastName
+                          }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method19()
+        {
+            Console.WriteLine("Method19\n");
             //19.Create a report showing all the odd numbers of OrderID from the orders table.
             var result = _db.Orders.Where(x => x.OrderId % 2 != 0)
                 .Select(x => new
@@ -459,7 +848,26 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query20()
+        public static void Query19()
+        {
+            Console.WriteLine("Query19\n");
+            //19.Create a report showing all the odd numbers of OrderID from the orders table.
+
+            var result = (from p in _db.Orders
+                          where p.OrderId % 2 != 0
+                          select new
+                          {
+                              CustomerId = p.CustomerId,
+                              OrderDate = p.OrderDate
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method20()
         {
             Console.WriteLine("Query20\n");
             //20. Create a report that shows the CompanyName, ContactName, Fax of all customers
@@ -479,11 +887,34 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query21()
+        public static void Query20()
+        {
+            Console.WriteLine("Query20\n");
+            //20. Create a report that shows the CompanyName, ContactName, Fax of all customers
+            //that do not have Fax number and sorted by ContactName.
+
+            var result = (from p in _db.Customers
+                          orderby p.ContactName
+                          where p.Fax == null
+                          select new
+                          {
+                              CompanyName = p.CompanyName,
+                              ContactName = p.ContactName,
+                              Fax = p.Fax
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method21()
         {
             //21. Create a report that shows the City, CompanyName, ContactName of customers from cities that has letter L in the name
             //sorted by ContactName
-            Console.WriteLine("Query21\n");
+            Console.WriteLine("Method21\n");
             var result = _db.Customers.Where(x => x.City.Contains("L")).OrderBy(x => x.ContactName)
                 .Select(x => new
                 {
@@ -499,12 +930,34 @@ namespace NorthWindSqlQuery
 
         }
 
-        public static void Query22()
+        public static void Query21()
+        {
+            //21. Create a report that shows the City, CompanyName, ContactName of customers from cities that has letter L in the name
+            //sorted by ContactName
+            Console.WriteLine("Query21\n");
+
+            var result = (from p in _db.Customers
+                          where p.City.Contains("L")
+                          orderby p.ContactName
+                          select new
+                          {
+                              City = p.City,
+                              CompanyName = p.CompanyName,
+                              ContactName = p.ContactName
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method22()
         {
             //22.Create a report that shows the FirstName, LastName, BirthDate of employees born in the 1950s.
             Console.WriteLine("Query22\n");
-            string dtString1 = "07.05.1950";
-            string dtString2 = "07.05.1960";
+            string dtString1 = "01.01.1950";
+            string dtString2 = "01.01.1960";
             var result = _db.Employees
                 .Where(x => x.BirthDate.Value.Year >= Convert.ToDateTime(dtString1).Year && x.BirthDate.Value.Year < Convert.ToDateTime(dtString2).Year)
                 .Select(x => new
@@ -521,10 +974,36 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query23()
+        public static void Query22()
+        {
+            //22.Create a report that shows the FirstName, LastName, BirthDate of employees born in the 1950s.
+            Console.WriteLine("Query22\n");
+
+            string dtString1 = "01.01.1950";
+            string dtString2 = "01.01.1960";
+            DateTime dt1 = Convert.ToDateTime(dtString1);
+            DateTime dt2 = Convert.ToDateTime(dtString2);
+
+            var result = (from p in _db.Employees
+                          where p.BirthDate<dt2 && p.BirthDate>dt1
+                          select new
+                          {
+                              FirstName=p.FirstName,
+                              LastName=p.LastName,
+                              BirthDate =p.BirthDate
+                          }
+                         ).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method23()
         {
             //23. Create a report that shows the FirstName, LastName, the year of Birthdate as birth year from the employees table.
-            Console.WriteLine("Qery21\n");
+            Console.WriteLine("Method23\n");
             var result = _db.Employees.Select(x => new
             {
                 FirstName = x.FirstName,
@@ -537,15 +1016,33 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query24()
+        public static void Query23()
+        {
+            //23. Create a report that shows the FirstName, LastName, the year of Birthdate as birth year from the employees table.
+            Console.WriteLine("Qery23\n");
+            var result = (from p in _db.Employees
+                          select new
+                          {
+                              FirstName = p.FirstName,
+                              LastName = p.LastName,
+                              Birthdate = p.BirthDate.Value.Year
+                          }).ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Method24()
         {
             //24. Create a report showing OrderID, total number of Order ID as NumberofOrders from the orderdetails table grouped by
             // OrderID and sorted by NumberofOrders in descending order. HINT: you will need to use a Groupby statement.
-            Console.WriteLine("Query24\n");
+            Console.WriteLine("Method24\n");
 
             var result = _db.OrderDetails.GroupBy(x => x.OrderId)
                 .Select(x => new { orderId = x.Key, NumberofOrders = x.Count() })
-                .OrderByDescending(x => x.orderId)
+               
                 .OrderByDescending(x => x.NumberofOrders).ToList();
             foreach (var item in result)
             {
@@ -553,7 +1050,33 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query25()
+        public static void Query24()
+        {
+            //24. Create a report showing OrderID, total number of Order ID as NumberofOrders from the orderdetails table grouped by
+            // OrderID and sorted by NumberofOrders in descending order. HINT: you will need to use a Groupby statement.
+            Console.WriteLine("Query24\n");
+            //TODO: count'u  let yöntemi ile denemen gerekli, bu yöntem de çaalışıyor.
+
+            var result = (from p in _db.OrderDetails
+                          group p by p.OrderId into pgroup
+                          orderby pgroup.Count() descending 
+                          select new
+                          {
+                              OrderID = pgroup.Key,
+                              NumberofOrders = pgroup.Count()
+
+
+                          })
+                          .ToList();
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
+
+        public static void Method25()
         {
             //TODO: JOIN
             //25. Create a report that shows the SupplierID, ProductName, CompanyName from all product Supplied by Exotic Liquids,
@@ -577,7 +1100,7 @@ namespace NorthWindSqlQuery
         }
 
 
-        public static void Query26()
+        public static void Method26()
         {
             //26.Create a report that shows the ShipPostalCode, OrderID, OrderDate, RequiredDate, ShippedDate, ShipAddress of all orders
             //with ShipPostalCode beginning with "98124".
@@ -599,7 +1122,7 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query27()
+        public static void Method27()
         {
             //27. Create a report that shows the ContactName, ContactTitle, CompanyName of customers that
             //the has no "Sales" in their ContactTitle.
@@ -619,7 +1142,7 @@ namespace NorthWindSqlQuery
 
         }
 
-        public static void Query28()
+        public static void Method28()
         {
             Console.WriteLine("Query28\n");
             //28.Create a report that shows the LastName, FirstName, City of employees in cities other "Seattle";
@@ -638,7 +1161,7 @@ namespace NorthWindSqlQuery
         }
 
 
-        public static void Query29()
+        public static void Method29()
         {
             Console.WriteLine("Query29"); //x.Country == "Mexico" || 
             //29. Create a report that shows the CompanyName, ContactTitle, City, Country of all customers
@@ -658,7 +1181,7 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query30()
+        public static void Method30()
         {   //30. Create a select statement that outputs the following:
             Console.WriteLine("Query30\n");
             var result = _db.Employees.Select(x => new
@@ -675,7 +1198,7 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query31()
+        public static void Method31()
         {
             //TODO: Linq Like kullanımda karşılaştığımız problem ilgili cümlenin sondan ikinci
             //karakterine göre like işlemini yapamıyoruz, daha sonra bakılacak.
@@ -691,7 +1214,7 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query32()
+        public static void Method32()
         {
             //32. Create a report that shows the average UnitPrice rounded to the next whole number,   .Average(x => x.UnitPrice);
             //total price of UnitsInStock and x => x.UnitsInStock * y=> y.UnitPrice  .Aggregate((UnitsInStock, UnitPrice) => UnitsInStock * UnitPrice)
@@ -714,7 +1237,7 @@ namespace NorthWindSqlQuery
         }
 
 
-        public static void Query33()
+        public static void Method33()
         {
             //33. Create a report that shows the SupplierID, CompanyName, CategoryName, ProductName and UnitPrice from the products,
             //suppliers and categories table.
@@ -736,7 +1259,7 @@ namespace NorthWindSqlQuery
 
         }
 
-        public static void Query34()
+        public static void Method34()
         {
             //34. Create a report that shows the CustomerID, sum of Freight, from the orders table with sum of freight
             //greater $200, grouped by CustomerID. HINT: you will need to use a Groupby and a Having statement
@@ -756,7 +1279,7 @@ namespace NorthWindSqlQuery
             }
         }
 
-        public static void Query35()
+        public static void Method35()
         {
             //35. Create a report that shows the OrderID ContactName, UnitPrice, Quantity, Discount from the order details, orders and
             //customers table with discount given on every purchase.
@@ -786,7 +1309,7 @@ namespace NorthWindSqlQuery
         }
 
 
-        public static void Query36()
+        public static void Method36()
         {
             //36.Create a report that shows the EmployeeID, the LastName and FirstName as employee, and the LastName and FirstName of
             //who they report to as manager from the employees table sorted by Employee ID. HINT: This is a SelfJoin.
@@ -809,7 +1332,7 @@ namespace NorthWindSqlQuery
 
         }
 
-        public static void Query37()
+        public static void Method37()
         {
             //37.Create a report that shows the average, minimum and maximum UnitPrice of all products as AveragePrice, MinimumPrice
             //and MaximumPrice respectively.
@@ -839,14 +1362,21 @@ namespace NorthWindSqlQuery
                           join o in _db.Orders on c.CustomerId equals o.CustomerId
                           select new
                           {
-                              customer=c,
-                              order=o,
+                              customer = c,
+                              order = o,
                           }
                           ).ToList();
             foreach (var item in result)
             {
                 Console.WriteLine(item.order.Customer.ToString());
             }
+        }
+
+        public static void Query39()
+        {
+            //39. Change the name of the view you created from customerinfo to customer details.
+
+
         }
 
 
@@ -868,6 +1398,7 @@ namespace NorthWindSqlQuery
         //        return false;
         //    }
         //}
+
 
     }
 }
