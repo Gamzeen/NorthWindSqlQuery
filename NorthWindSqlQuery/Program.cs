@@ -83,9 +83,10 @@ namespace NorthWindSqlQuery
             //Method23();
 
             Query24();
-            Method24();
+            //Method24();
 
             //Query25();
+           // Method25();
 
             //Query26();
 
@@ -1055,8 +1056,6 @@ namespace NorthWindSqlQuery
             //24. Create a report showing OrderID, total number of Order ID as NumberofOrders from the orderdetails table grouped by
             // OrderID and sorted by NumberofOrders in descending order. HINT: you will need to use a Groupby statement.
             Console.WriteLine("Query24\n");
-            //TODO: count'u  let yöntemi ile denemen gerekli, bu yöntem de çaalışıyor.
-
 
             var result = (from p in _db.OrderDetails
                           group p by p.OrderId into pgroup
@@ -1082,7 +1081,7 @@ namespace NorthWindSqlQuery
             //TODO: JOIN
             //25. Create a report that shows the SupplierID, ProductName, CompanyName from all product Supplied by Exotic Liquids,
             //Specialty Biscuits, Ltd., Escargots Nouveaux sorted by the supplier ID
-            Console.WriteLine("Query25\n");
+            Console.WriteLine("Method25\n");
 
             var result = _db.Products.Include("Supplier").Select(x => new
             {
@@ -1090,7 +1089,7 @@ namespace NorthWindSqlQuery
                 ProductName = x.ProductName,
                 CompanyName = x.Supplier.CompanyName
             }
-            ).Where(x => x.CompanyName.Contains("Exotic Liquids") || x.CompanyName.Contains("Specialty Biscuits") || x.CompanyName.Contains(" Ltd.") || x.CompanyName.Contains("Escargots Nouveaux"))
+            ).Where(x => x.CompanyName.Contains("Exotic Liquids") || x.CompanyName.Contains("Specialty Biscuits, Ltd.") || x.CompanyName.Contains("Escargots Nouveaux"))
             .OrderBy(x => x.SupplierID).ToList();
 
             foreach (var item in result)
@@ -1100,6 +1099,30 @@ namespace NorthWindSqlQuery
 
         }
 
+        public static void Query25()
+        {
+            //25. Create a report that shows the SupplierID, ProductName, CompanyName from all product Supplied by Exotic Liquids,
+            //Specialty Biscuits, Ltd., Escargots Nouveaux sorted by the supplier ID
+            Console.WriteLine("Query25\n");
+
+            var result = (from p in _db.Products
+                         join s in _db.Suppliers
+                         on p.SupplierId equals s.SupplierId
+                         where s.CompanyName.Contains("Exotic Liquids") || s.CompanyName.Contains("Specialty Biscuits, Ltd.") || s.CompanyName.Contains("Escargots Nouveaux")
+                         orderby p.SupplierId
+                          select new
+                         {
+                             SupplierID = p.SupplierId,
+                             ProductName = p.ProductName,
+                             CompanyName =s.CompanyName
+
+                         }).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+
+        }
 
         public static void Method26()
         {
@@ -1117,6 +1140,29 @@ namespace NorthWindSqlQuery
                 ShipAddress = x.ShipAddress
             }
             ).ToList();
+            foreach (var item in result)
+            {
+                Console.WriteLine(item.ToString());
+            }
+        }
+
+        public static void Query26()
+        {
+            //26.Create a report that shows the ShipPostalCode, OrderID, OrderDate, RequiredDate, ShippedDate, ShipAddress of all orders
+            //with ShipPostalCode beginning with "98124".
+
+            Console.WriteLine("Query26\n");
+            var result = (from p in _db.Orders
+                          where p.ShipPostalCode.StartsWith("98124")
+                          select new
+                          {
+                              ShipPostalCode = p.ShipPostalCode,
+                              OrderID = p.OrderId,
+                              OrderDate = p.OrderDate,
+                              RequiredDate = p.RequiredDate,
+                              ShippedDate = p.ShippedDate,
+                              ShipAddress = p.ShipAddress
+                          }).ToList();
             foreach (var item in result)
             {
                 Console.WriteLine(item.ToString());
