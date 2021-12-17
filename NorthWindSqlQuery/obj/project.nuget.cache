@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "s2zLUfLcQ6RpVwsOv6Lhabj+Hlpus5anOOriT/jPoWo6aAvSiw//nLW8Sj/QJA+jNEVj3he4Na+N6foEpFYZlQ==",
+  "dgSpecHash": "TuWMoBUn7P9Gg5+hp39xP4YVepyAjiOaiziryP1nG/UqUPUNFs5HFxb7i8TLqsYuNz/a56aHSXIFtyxz3T+HNA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Gamze Nur Demir\\Documents\\GitHub\\NorthWindSqlQuery\\NorthWindSqlQuery\\NorthWindSqlQuery.csproj",
   "expectedPackageFiles": [
@@ -100,7 +100,8 @@
     "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\Gamze Nur Demir\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.12\\microsoft.netcore.app.host.win-x64.5.0.12.nupkg.sha512"
   ],
   "logs": []
 }
